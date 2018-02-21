@@ -52,7 +52,7 @@ public class playerController : MonoBehaviour
             }
 
             //check if up arrow is pressed while moving
-            if (Input.GetKey(KeyCode.UpArrow) && radius <= 9f && landed == true)
+            if (Input.GetKey(KeyCode.UpArrow) && radius <= 11f && landed == true)
             {
                 //increment radius by gravity
                 radius += 3f * Time.deltaTime;
@@ -70,14 +70,14 @@ public class playerController : MonoBehaviour
             }
 
             //check if up arrow is pressed while moving
-            if (Input.GetKey(KeyCode.UpArrow) && radius <= 9f && landed == true)
+            if (Input.GetKey(KeyCode.UpArrow) && radius <= 11f && landed == true)
             {
                 //increment radius by gravity
                 radius += 3f * Time.deltaTime;
             }
         }
         //else if user input is the up arrow key
-        else if (Input.GetKey(KeyCode.UpArrow) && radius <= 9f && landed == true)
+        else if (Input.GetKey(KeyCode.UpArrow) && radius <= 11f && landed == true)
         {
             //increment radius by gravity
             radius += 3f * Time.deltaTime;
