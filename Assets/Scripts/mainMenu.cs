@@ -12,6 +12,10 @@ public class mainMenu : MonoBehaviour {
 
     public GameObject planet;
     public GameObject landerShip;
+	public GameObject score;
+	public GameObject highScore;
+	public GameObject ResetHighScore;
+
 
 	public void Play()
     {
@@ -19,6 +23,9 @@ public class mainMenu : MonoBehaviour {
         planet.SetActive(true);
         landerShip.SetActive(true);
         timer.SetActive(true);
+		score.SetActive (true);
+		highScore.SetActive (true);
+		ResetHighScore.SetActive (true);
     }
 
     public void About()
