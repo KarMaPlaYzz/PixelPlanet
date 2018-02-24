@@ -11,13 +11,19 @@ public class playerController : MonoBehaviour
 
     public float radius = 9f;
 
+    public Animator myAnim;
+
+    public Transform mainCam;
+
     public float current;
     public float currentVelocity;
     public float smoothTime;
     public float maxSpeed;
 
+    public float decrease = 1f;
+
     public randomEventManager randomEventManager;
-    public float gravity = .01f;
+    public float gravity = .5f;
     private Vector3 planet = new Vector3(0, 0, 0);
     public Vector2 centre;
     public float angle;
@@ -27,6 +33,7 @@ public class playerController : MonoBehaviour
     private void Start()
     {
         centre = planet;
+        myAnim = GetComponent<Animator>();
     }
 
     private void Update()
@@ -36,60 +43,72 @@ public class playerController : MonoBehaviour
         //if user input is the left arrow key
 		if (Input.GetKey (KeyCode.LeftArrow)) {
 			//decrement radius by gravity
-			if (canMove == true) {
-				//increment radius by gravity
-				radius -= gravity;
+			if (canMove == true)
+            {
+                //increment radius by gravity
+                radius -= gravity;
                 
 				//increment the angle by (-rotateSpeed * deltaTime)
 				angle += Mathf.SmoothDamp (current, -rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
-				glidingDirection = -.6f;
+
+				glidingDirection = -2f;
 
 				lastGlidingDirection = glidingDirection;
 				 
 			}
 
 			//check if up arrow is pressed while moving
-			if (Input.GetKey (KeyCode.UpArrow) && radius <= 11f && landed == true) {
+			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
 				//increment radius by gravity
-				radius += 3f * Time.deltaTime;
-				angle += Mathf.SmoothDamp (current, rotateSpeed*lastGlidingDirection*Time.deltaTime, ref currentVelocity, smoothTime, maxSpeed);
+				radius += 2f * Time.deltaTime;
 			}
 		}
+
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
+        {
+            StartCoroutine(slideLeft());
+        }
+
         //else if user input is the right arrow key
         else if (Input.GetKey (KeyCode.RightArrow)) {
 			//decrement radius by gravity
 			if (canMove == true) {
-				radius -= gravity;
+                //increment radius by gravity
+                radius -= gravity;
 				//increment angle by (rotateSpeed * deltaTime)
 				angle += Mathf.SmoothDamp (current, rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
-				glidingDirection = .6f;
+
+				glidingDirection = 2f;
 				 
 				lastGlidingDirection = glidingDirection;
 			 
 			}
 
 			//check if up arrow is pressed while moving
-			if (Input.GetKey (KeyCode.UpArrow) && radius <= 11f && landed == true) {
+			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
 				//increment radius by gravity
-				radius += 3f * Time.deltaTime;
-				angle += Mathf.SmoothDamp (current, rotateSpeed*lastGlidingDirection*Time.deltaTime, ref currentVelocity, smoothTime, maxSpeed);
+				radius += 2f * Time.deltaTime;
 			}
 		}
+
+        if (Input.GetKeyUp(KeyCode.RightArrow))
+        {
+            StartCoroutine(slideRight());
+        }
+
         //else if user input is the up arrow key
-        else if (Input.GetKey (KeyCode.UpArrow) && radius <= 11f && landed == true) {
+        else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
 			//increment radius by gravity
-			radius += 3f * Time.deltaTime;
-			//angle += Mathf.SmoothDamp (current, rotateSpeed*Time.deltaTime, ref currentVelocity, smoothTime, maxSpeed);
+			radius += 2f * Time.deltaTime;
 
 			if (landed == false) {
 				canMove = true;
 			}
-			//glidingDirection = 0;
 		} else {
-			angle += Mathf.SmoothDamp (current, rotateSpeed*glidingDirection*Time.deltaTime, ref currentVelocity, smoothTime, maxSpeed);
-		}
+            angle += Mathf.SmoothDamp(current, rotateSpeed * glidingDirection * Time.deltaTime, ref currentVelocity, smoothTime, maxSpeed);
+        }
 
-        
+
         //makes the lander fall
         radius -= gravity;
 
@@ -134,6 +153,62 @@ public class playerController : MonoBehaviour
             canMove = true;
             gravity = 0.01f;
             spinWithPlanet = false;
+        }
+    }
+
+    IEnumerator slideLeft()
+    {
+        yield return new WaitForSeconds(1f);
+
+        if (glidingDirection < 0)
+        {
+            glidingDirection += decrease;
+        }
+        yield return new WaitForSeconds(1f);
+
+        if (glidingDirection < 0)
+        {
+            glidingDirection += decrease;
+        }
+        yield return new WaitForSeconds(1f);
+
+        if (glidingDirection < 0)
+        {
+            glidingDirection += decrease;
+        }
+        yield return new WaitForSeconds(1f);
+
+        if (glidingDirection < 0)
+        {
+            glidingDirection += decrease;
+        }
+    }
+
+    IEnumerator slideRight()
+    {
+        yield return new WaitForSeconds(1f);
+
+        if (glidingDirection > 0)
+        {
+            glidingDirection -= decrease;
+        }
+        yield return new WaitForSeconds(1f);
+
+        if (glidingDirection > 0)
+        {
+            glidingDirection -= decrease;
+        }
+        yield return new WaitForSeconds(1f);
+
+        if (glidingDirection > 0)
+        {
+            glidingDirection -= decrease;
+        }
+        yield return new WaitForSeconds(1f);
+
+        if (glidingDirection > 0)
+        {
+            glidingDirection -= decrease;
         }
     }
 }
