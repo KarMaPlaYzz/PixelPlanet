@@ -22,8 +22,6 @@ public class timerDisplay : MonoBehaviour {
         {
             timerText.text = "YOU LOST!" ;
 
-            Debug.Log("YOU LOST");
-
             timer = 0;
         }
 	}

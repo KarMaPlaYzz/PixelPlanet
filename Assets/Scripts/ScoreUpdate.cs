@@ -25,7 +25,7 @@ public class ScoreUpdate : MonoBehaviour {
 
 	void OnTriggerExit2D(Collider2D col)//score Update trigger
 	{
-		if (col.gameObject.tag == "scoreOrbit" && !hasExited) {
+		if (col.gameObject.tag == "scoreOrbit"  && !hasExited) {
 			Score++;
 			hasExited = true;
 		}
