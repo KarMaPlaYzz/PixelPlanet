@@ -26,10 +26,11 @@ public class ScoreUpdate : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D col)//score Update trigger
 	{
-		if (col.gameObject.tag == "scoreOrbit"  && !hasExited &&!player.GetComponent<playerController>().needToLand) {
+		if (col.gameObject.tag == "scoreOrbit"  && !hasExited && !player.GetComponent<playerController>().needToLand && player.GetComponent<playerController>().landed) {
 			Score++;
 			hasExited = true;
             StartCoroutine(switchPlanet());
+            player.GetComponent<playerController>().landed = false;
         }
 	}
 	void OnTriggerEnter2D(Collider2D col)

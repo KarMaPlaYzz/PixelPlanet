@@ -51,21 +51,21 @@ public class playerController : MonoBehaviour
                 radius -= gravity;
 
                 rotateSpeed = 1f;
+                glidingDirection = -2f;
 
                 //increment the angle by (-rotateSpeed * deltaTime)
                 angle += Mathf.SmoothDamp(current, -rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
-
-				glidingDirection = -2f;
 
 				lastGlidingDirection = glidingDirection;
 				 
 			}
 
 			//check if up arrow is pressed while moving
-			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
+			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 				//increment radius by gravity
 				radius += 3f * Time.deltaTime;
                 rotateSpeed = 0f;
+                glidingDirection = 0f;
             }
         }
         //else if user input is the right arrow key
@@ -76,31 +76,26 @@ public class playerController : MonoBehaviour
                 radius -= gravity;
 
                 rotateSpeed = 1f;
+                glidingDirection = 2f;
 
-				//increment angle by (rotateSpeed * deltaTime)
-				angle += Mathf.SmoothDamp (current, rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
-
-				glidingDirection = 2f;
+                //increment angle by (rotateSpeed * deltaTime)
+                angle += Mathf.SmoothDamp (current, rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
 				 
 				lastGlidingDirection = glidingDirection;
 			 
 			}
 
 			//check if up arrow is pressed while moving
-			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
+			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 				//increment radius by gravity
 				radius += 3f * Time.deltaTime;
 			}
 		}
         //else if user input is the up arrow key
-        else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
+        else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 			//increment radius by gravity
 			radius += 3f * Time.deltaTime;
-
-			if (landed == false) {
-				canMove = true;
-			}
-		} else {
+            
             angle += Mathf.SmoothDamp(current, rotateSpeed * glidingDirection * Time.deltaTime, ref currentVelocity, smoothTime, maxSpeed);
         }
 
@@ -130,7 +125,8 @@ public class playerController : MonoBehaviour
         
         if (radius > 12.1f)
         {
-            landed = false;
+            rotateSpeed = 0;
+            glidingDirection = 0;
         }
     }
 
@@ -151,7 +147,6 @@ public class playerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Planet")
         {
-			 
             canMove = true;
             gravity = 0.01f;
             spinWithPlanet = false;
