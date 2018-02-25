@@ -50,6 +50,8 @@ public class playerController : MonoBehaviour
                 //increment radius by gravity
                 radius -= gravity;
 
+                rotateSpeed = 1f;
+
                 //increment the angle by (-rotateSpeed * deltaTime)
                 angle += Mathf.SmoothDamp(current, -rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
 
@@ -63,20 +65,18 @@ public class playerController : MonoBehaviour
 			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
 				//increment radius by gravity
 				radius += 3f * Time.deltaTime;
+                rotateSpeed = 0f;
             }
         }
-
-        if (Input.GetKeyUp(KeyCode.LeftArrow))
-        {
-            StartCoroutine(slideLeft());
-        }
-
         //else if user input is the right arrow key
         else if (Input.GetKey (KeyCode.RightArrow)) {
 			//decrement radius by gravity
 			if (canMove == true) {
                 //increment radius by gravity
                 radius -= gravity;
+
+                rotateSpeed = 1f;
+
 				//increment angle by (rotateSpeed * deltaTime)
 				angle += Mathf.SmoothDamp (current, rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
 
@@ -92,12 +92,6 @@ public class playerController : MonoBehaviour
 				radius += 3f * Time.deltaTime;
 			}
 		}
-
-        if (Input.GetKeyUp(KeyCode.RightArrow))
-        {
-            StartCoroutine(slideRight());
-        }
-
         //else if user input is the up arrow key
         else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
 			//increment radius by gravity
@@ -134,7 +128,7 @@ public class playerController : MonoBehaviour
         //makes the landership look at the planet
         transform.rotation = Quaternion.Euler(0f, 0f, (Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg) - 270);
         
-        if (radius > 12.4f)
+        if (radius > 12.1f)
         {
             landed = false;
         }
