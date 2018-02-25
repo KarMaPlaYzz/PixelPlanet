@@ -10,7 +10,7 @@ public class mainMenu : MonoBehaviour {
     public GameObject shipOverlay;
     public GameObject timer;
 
-    public GameObject planet;
+    public GameObject planetRandomizer;
     public GameObject landerShip;
 	public GameObject score;
 	public GameObject highScore;
@@ -20,7 +20,7 @@ public class mainMenu : MonoBehaviour {
 	public void Play()
     {
         mainMenuOverlay.SetActive(false);
-        planet.SetActive(true);
+        planetRandomizer.SetActive(true);
         landerShip.SetActive(true);
         timer.SetActive(true);
 		score.SetActive (true);
@@ -45,7 +45,7 @@ public class mainMenu : MonoBehaviour {
         mainMenuOverlay.SetActive(true);
         aboutOverlay.SetActive(false);
         shipOverlay.SetActive(false);
-        planet.SetActive(false);
+        planetRandomizer.SetActive(false);
         landerShip.SetActive(false);
     }
 }

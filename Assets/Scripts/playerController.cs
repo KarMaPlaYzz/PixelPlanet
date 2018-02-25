@@ -29,11 +29,13 @@ public class playerController : MonoBehaviour
     public float angle;
 	public float glidingDirection=0;
 	public float lastGlidingDirection;
+	public bool needToLand;
 
     private void Start()
     {
         centre = planet;
         myAnim = GetComponent<Animator>();
+        randomEventManager = FindObjectOfType<randomEventManager>();
     }
 
     private void Update()
@@ -47,9 +49,9 @@ public class playerController : MonoBehaviour
             {
                 //increment radius by gravity
                 radius -= gravity;
-                
-				//increment the angle by (-rotateSpeed * deltaTime)
-				angle += Mathf.SmoothDamp (current, -rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
+
+                //increment the angle by (-rotateSpeed * deltaTime)
+                angle += Mathf.SmoothDamp(current, -rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
 
 				glidingDirection = -2f;
 
@@ -60,9 +62,9 @@ public class playerController : MonoBehaviour
 			//check if up arrow is pressed while moving
 			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
 				//increment radius by gravity
-				radius += 2f * Time.deltaTime;
-			}
-		}
+				radius += 3f * Time.deltaTime;
+            }
+        }
 
         if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
@@ -87,7 +89,7 @@ public class playerController : MonoBehaviour
 			//check if up arrow is pressed while moving
 			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
 				//increment radius by gravity
-				radius += 2f * Time.deltaTime;
+				radius += 3f * Time.deltaTime;
 			}
 		}
 
@@ -99,7 +101,7 @@ public class playerController : MonoBehaviour
         //else if user input is the up arrow key
         else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f && landed == true) {
 			//increment radius by gravity
-			radius += 2f * Time.deltaTime;
+			radius += 3f * Time.deltaTime;
 
 			if (landed == false) {
 				canMove = true;
@@ -131,6 +133,11 @@ public class playerController : MonoBehaviour
 
         //makes the landership look at the planet
         transform.rotation = Quaternion.Euler(0f, 0f, (Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg) - 270);
+        
+        if (radius > 12.4f)
+        {
+            landed = false;
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -138,6 +145,7 @@ public class playerController : MonoBehaviour
         if (other.gameObject.tag == "Planet")
         {
             landed = true;
+			needToLand = false;
 			glidingDirection = 0f;
             spinWithPlanet = true;
             canMove = false;
@@ -153,6 +161,7 @@ public class playerController : MonoBehaviour
             canMove = true;
             gravity = 0.01f;
             spinWithPlanet = false;
+			needToLand = false;
         }
     }
 

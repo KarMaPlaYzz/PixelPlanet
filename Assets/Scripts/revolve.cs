@@ -7,9 +7,13 @@ public class revolve : MonoBehaviour {
 	public GameObject planet;
 	public float rotationSpeed;
 	public bool clockwise;
-	 
+	void Start()
+	{
+		
+	}
 	void Update()
 	{
+		
 		if (clockwise) {
 		
 			transform.RotateAround (planet.transform.position, transform.forward, -rotationSpeed * Time.deltaTime);

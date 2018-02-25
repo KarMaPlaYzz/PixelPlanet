@@ -5,15 +5,16 @@ using UnityEngine.UI;
 
 public class ScoreUpdate : MonoBehaviour {
 	
-	 
+	
 	private int Score;
 	public Text scoreText;
 	public Text highScoreText;
 	private bool hasExited;
+    public GameObject planetRandom;
+	public GameObject player;
 
 	void Start()
 	{
-		
 		Score = 0;
 		highScoreText.text = "High Score : "+PlayerPrefs.GetInt ("HighScore", 0).ToString ();
 	}
@@ -23,12 +24,18 @@ public class ScoreUpdate : MonoBehaviour {
 		HighScoreUpdate ();
 	}
 
-	void OnTriggerExit2D(Collider2D col)//score Update trigger
+    void OnTriggerExit2D(Collider2D col)//score Update trigger
 	{
-		if (col.gameObject.tag == "scoreOrbit"  && !hasExited) {
+		if (col.gameObject.tag == "scoreOrbit"  && !hasExited &&!player.GetComponent<playerController>().needToLand) {
 			Score++;
 			hasExited = true;
-		}
+            StartCoroutine(switchPlanet());
+        }
+	}
+	void OnTriggerEnter2D(Collider2D col)
+	{
+		hasExited = false;
+		player.GetComponent<playerController> ().needToLand = true;
 	}
 
 	void HighScoreUpdate()
@@ -44,4 +51,13 @@ public class ScoreUpdate : MonoBehaviour {
 		PlayerPrefs.DeleteAll ();
 		highScoreText.text = "High Score : " + 0;
 	}
+
+    IEnumerator switchPlanet()
+    {
+        Destroy(GameObject.FindWithTag("PlanetRandomizer"));
+        yield return new WaitForSeconds(0.5f);
+        Destroy(GameObject.FindWithTag("Planet"));
+        yield return new WaitForSeconds(0.5f);
+        Instantiate(planetRandom, new Vector3 (0,0), Quaternion.identity);
+    }
 }
