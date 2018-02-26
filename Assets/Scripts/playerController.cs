@@ -50,7 +50,7 @@ public class playerController : MonoBehaviour
                 //increment radius by gravity
                 radius -= gravity;
 
-                rotateSpeed = 1f;
+                rotateSpeed = 0.7f;
                 glidingDirection = -2f;
 
                 //increment the angle by (-rotateSpeed * deltaTime)
@@ -58,16 +58,13 @@ public class playerController : MonoBehaviour
 
 				lastGlidingDirection = glidingDirection;
                 
-			} else
-            {
-                StartCoroutine(slideLeft());
-            }
+			}
 
 			//check if up arrow is pressed while moving
 			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 				//increment radius by gravity
-				radius += 3f * Time.deltaTime;
-                rotateSpeed = 0f;
+				radius += 2.5f * Time.deltaTime;
+                rotateSpeed = 0.7f;
                 glidingDirection = 0f;
             }
         }
@@ -79,7 +76,7 @@ public class playerController : MonoBehaviour
                 //increment radius by gravity
                 radius -= gravity;
 
-                rotateSpeed = 1f;
+                rotateSpeed = 0.7f;
                 glidingDirection = 2f;
 
                 //increment angle by (rotateSpeed * deltaTime)
@@ -88,22 +85,18 @@ public class playerController : MonoBehaviour
                 lastGlidingDirection = glidingDirection;
 
             }
-            else
-            {
-                StartCoroutine(slideRight());
-            }
 
             //check if up arrow is pressed while moving
             if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 				//increment radius by gravity
-				radius += 3f * Time.deltaTime;
+				radius += 2.5f * Time.deltaTime;
 			}
 		}
 
         //else if user input is the up arrow key
         else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 			//increment radius by gravity
-			radius += 3f * Time.deltaTime;
+			radius += 2.5f * Time.deltaTime;
         }
 
 
@@ -129,11 +122,6 @@ public class playerController : MonoBehaviour
 
         //makes the landership look at the planet
         transform.rotation = Quaternion.Euler(0f, 0f, (Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg) - 270);
-        
-        if (radius > 12.1f)
-        {
-
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -158,63 +146,5 @@ public class playerController : MonoBehaviour
             spinWithPlanet = false;
 			needToLand = false;
         }
-    }
-
-    IEnumerator slideLeft()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        if (glidingDirection < 0)
-        {
-            glidingDirection += decrease;
-        }
-        yield return new WaitForSeconds(0.5f);
-
-        if (glidingDirection < 0)
-        {
-            glidingDirection += decrease;
-        }
-        yield return new WaitForSeconds(0.5f);
-
-        if (glidingDirection < 0)
-        {
-            glidingDirection += decrease;
-        }
-        yield return new WaitForSeconds(0.5f);
-
-        if (glidingDirection < 0)
-        {
-            glidingDirection += decrease;
-        }
-        yield return new WaitForSeconds(0.5f);
-    }
-
-    IEnumerator slideRight()
-    {
-        yield return new WaitForSeconds(0.5f);
-
-        if (glidingDirection > 0)
-        {
-            glidingDirection -= decrease;
-        }
-        yield return new WaitForSeconds(0.5f);
-
-        if (glidingDirection > 0)
-        {
-            glidingDirection -= decrease;
-        }
-        yield return new WaitForSeconds(0.5f);
-
-        if (glidingDirection > 0)
-        {
-            glidingDirection -= decrease;
-        }
-        yield return new WaitForSeconds(0.5f);
-
-        if (glidingDirection > 0)
-        {
-            glidingDirection -= decrease;
-        }
-        yield return new WaitForSeconds(0.5f);
     }
 }

@@ -8,10 +8,14 @@ public class revolve : MonoBehaviour {
     public GameObject asteroid;
 	public float rotationSpeedPlanet;
 	public bool clockwise;
+
+    public int randomPlace;
+
 	void Start()
 	{
         asteroid = gameObject;
-	}
+        randomPlace = Random.Range(1, 8);
+    }
 	void Update()
 	{
         if (clockwise) {
@@ -22,7 +26,7 @@ public class revolve : MonoBehaviour {
 
             asteroid.transform.Rotate(0, 0, 0.5f);
             transform.RotateAround (planet.transform.position, transform.forward, rotationSpeedPlanet * Time.deltaTime);
-		}
+        }
 	}
 
 }
