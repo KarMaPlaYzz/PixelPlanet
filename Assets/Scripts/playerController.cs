@@ -54,11 +54,14 @@ public class playerController : MonoBehaviour
                 glidingDirection = -2f;
 
                 //increment the angle by (-rotateSpeed * deltaTime)
-                angle += Mathf.SmoothDamp(current, -rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
+                angle += -rotateSpeed * Time.deltaTime;
 
 				lastGlidingDirection = glidingDirection;
-				 
-			}
+                
+			} else
+            {
+                StartCoroutine(slideLeft());
+            }
 
 			//check if up arrow is pressed while moving
 			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
@@ -68,6 +71,7 @@ public class playerController : MonoBehaviour
                 glidingDirection = 0f;
             }
         }
+
         //else if user input is the right arrow key
         else if (Input.GetKey (KeyCode.RightArrow)) {
 			//decrement radius by gravity
@@ -79,24 +83,27 @@ public class playerController : MonoBehaviour
                 glidingDirection = 2f;
 
                 //increment angle by (rotateSpeed * deltaTime)
-                angle += Mathf.SmoothDamp (current, rotateSpeed, ref currentVelocity, smoothTime, maxSpeed);
-				 
-				lastGlidingDirection = glidingDirection;
-			 
-			}
+                angle += rotateSpeed * Time.deltaTime;
 
-			//check if up arrow is pressed while moving
-			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
+                lastGlidingDirection = glidingDirection;
+
+            }
+            else
+            {
+                StartCoroutine(slideRight());
+            }
+
+            //check if up arrow is pressed while moving
+            if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 				//increment radius by gravity
 				radius += 3f * Time.deltaTime;
 			}
 		}
+
         //else if user input is the up arrow key
         else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 			//increment radius by gravity
 			radius += 3f * Time.deltaTime;
-            
-            angle += Mathf.SmoothDamp(current, rotateSpeed * glidingDirection * Time.deltaTime, ref currentVelocity, smoothTime, maxSpeed);
         }
 
 
@@ -125,8 +132,7 @@ public class playerController : MonoBehaviour
         
         if (radius > 12.1f)
         {
-            rotateSpeed = 0;
-            glidingDirection = 0;
+
         }
     }
 
@@ -156,57 +162,59 @@ public class playerController : MonoBehaviour
 
     IEnumerator slideLeft()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (glidingDirection < 0)
         {
             glidingDirection += decrease;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (glidingDirection < 0)
         {
             glidingDirection += decrease;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (glidingDirection < 0)
         {
             glidingDirection += decrease;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (glidingDirection < 0)
         {
             glidingDirection += decrease;
         }
+        yield return new WaitForSeconds(0.5f);
     }
 
     IEnumerator slideRight()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (glidingDirection > 0)
         {
             glidingDirection -= decrease;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (glidingDirection > 0)
         {
             glidingDirection -= decrease;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (glidingDirection > 0)
         {
             glidingDirection -= decrease;
         }
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         if (glidingDirection > 0)
         {
             glidingDirection -= decrease;
         }
+        yield return new WaitForSeconds(0.5f);
     }
 }

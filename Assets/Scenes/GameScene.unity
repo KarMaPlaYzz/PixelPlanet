@@ -726,7 +726,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4534928093666462, guid: 90ca309e1259f6e4cb3c79200af1b5f3, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1432655455716356, guid: 90ca309e1259f6e4cb3c79200af1b5f3, type: 2}
       propertyPath: m_IsActive
@@ -2092,7 +2092,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &839890969
 GameObject:
@@ -4180,6 +4180,8 @@ MonoBehaviour:
   glidingDirection: 0
   lastGlidingDirection: 0
   needToLand: 0
+  glideLeft: 0
+  glideRight: 0
 --- !u!61 &2016504366
 BoxCollider2D:
   m_ObjectHideFlags: 0

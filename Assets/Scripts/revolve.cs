@@ -5,20 +5,23 @@ using UnityEngine;
 public class revolve : MonoBehaviour {
 
 	public GameObject planet;
-	public float rotationSpeed;
+    public GameObject asteroid;
+	public float rotationSpeedPlanet;
 	public bool clockwise;
 	void Start()
 	{
-		
+        asteroid = gameObject;
 	}
 	void Update()
 	{
-		
-		if (clockwise) {
-		
-			transform.RotateAround (planet.transform.position, transform.forward, -rotationSpeed * Time.deltaTime);
+        if (clockwise) {
+
+            asteroid.transform.Rotate(0, 0, 1f);
+            transform.RotateAround(planet.transform.position, transform.forward, -rotationSpeedPlanet * Time.deltaTime);
 		} else {
-			transform.RotateAround (planet.transform.position, transform.forward, rotationSpeed * Time.deltaTime);
+
+            asteroid.transform.Rotate(0, 0, 0.5f);
+            transform.RotateAround (planet.transform.position, transform.forward, rotationSpeedPlanet * Time.deltaTime);
 		}
 	}
 
