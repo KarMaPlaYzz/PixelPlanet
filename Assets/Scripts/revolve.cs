@@ -9,22 +9,22 @@ public class revolve : MonoBehaviour {
 	public float rotationSpeedPlanet;
 	public bool clockwise;
 
-    public int randomPlace;
+    public float randomRotate;
 
 	void Start()
 	{
         asteroid = gameObject;
-        randomPlace = Random.Range(1, 8);
+        randomRotate = Random.Range(-0.2f, 1f);
     }
 	void Update()
 	{
         if (clockwise) {
 
-            asteroid.transform.Rotate(0, 0, 1f);
+            asteroid.transform.Rotate(0, 0, randomRotate);
             transform.RotateAround(planet.transform.position, transform.forward, -rotationSpeedPlanet * Time.deltaTime);
 		} else {
 
-            asteroid.transform.Rotate(0, 0, 0.5f);
+            asteroid.transform.Rotate(0, 0, randomRotate);
             transform.RotateAround (planet.transform.position, transform.forward, rotationSpeedPlanet * Time.deltaTime);
         }
 	}

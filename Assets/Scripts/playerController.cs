@@ -23,7 +23,7 @@ public class playerController : MonoBehaviour
     public float decrease = 1f;
 
     public randomEventManager randomEventManager;
-    public float gravity = .5f;
+    public float gravity = .016f;
     private Vector3 planet = new Vector3(0, 0, 0);
     public Vector2 centre;
     public float angle;
@@ -63,7 +63,7 @@ public class playerController : MonoBehaviour
 			//check if up arrow is pressed while moving
 			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 				//increment radius by gravity
-				radius += 2.5f * Time.deltaTime;
+				radius += 3f * Time.deltaTime;
                 rotateSpeed = 0.7f;
                 glidingDirection = 0f;
             }
@@ -89,14 +89,14 @@ public class playerController : MonoBehaviour
             //check if up arrow is pressed while moving
             if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 				//increment radius by gravity
-				radius += 2.5f * Time.deltaTime;
+				radius += 3f * Time.deltaTime;
 			}
 		}
 
         //else if user input is the up arrow key
         else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 			//increment radius by gravity
-			radius += 2.5f * Time.deltaTime;
+			radius += 3f * Time.deltaTime;
         }
 
 
@@ -142,7 +142,7 @@ public class playerController : MonoBehaviour
         if (other.gameObject.tag == "Planet")
         {
             canMove = true;
-            gravity = 0.01f;
+            gravity = 0.016f;
             spinWithPlanet = false;
 			needToLand = false;
         }
