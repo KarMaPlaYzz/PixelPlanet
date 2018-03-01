@@ -181,7 +181,6 @@ GameObject:
   - component: {fileID: 4759071094472658}
   - component: {fileID: 212277748769716850}
   - component: {fileID: 114315838554761096}
-  - component: {fileID: 50750854135254458}
   - component: {fileID: 60636574232064396}
   m_Layer: 0
   m_Name: asteroid
@@ -411,26 +410,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 7
---- !u!50 &50750854135254458
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1950435693861274}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!58 &58565607089801136
 CircleCollider2D:
   m_ObjectHideFlags: 1
