@@ -6,7 +6,7 @@ public class RevolveRandomiser : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		transform.localRotation = new Quaternion (transform.localRotation.x, transform.localRotation.y, Random.value, transform.localRotation.w); ;
 		int directionRandomiser=Random.Range(0,2);
 
 		int speedRandomiser = Random.Range (12, 16); 
