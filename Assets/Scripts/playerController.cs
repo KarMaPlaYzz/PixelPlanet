@@ -5,31 +5,27 @@ using UnityEngine;
 public class playerController : MonoBehaviour
 {
     public float rotateSpeed = 1f;
-    public bool canMove = true;
-    public bool landed = false;
-    public bool spinWithPlanet = false;
-
     public float radius = 9f;
-
-    public Animator myAnim;
-
-    public Transform mainCam;
-
     public float current;
     public float currentVelocity;
     public float smoothTime;
     public float maxSpeed;
-
+    public float angle;
+    public float glidingDirection = 0;
+    public float lastGlidingDirection;
+    public float gravity = .016f;
     public float decrease = 1f;
 
+    public bool canMove = true;
+    public bool spinWithPlanet = false;
+    public bool nextPlanet = false;
+
+    public Animator myAnim;
+    public Transform mainCam;
     public randomEventManager randomEventManager;
-    public float gravity = .016f;
-    private Vector3 planet = new Vector3(0, 0, 0);
     public Vector2 centre;
-    public float angle;
-	public float glidingDirection=0;
-	public float lastGlidingDirection;
-	public bool needToLand;
+    
+    private Vector3 planet = new Vector3(0, 0, 0);
 
     private void Start()
     {
@@ -87,14 +83,14 @@ public class playerController : MonoBehaviour
             }
 
             //check if up arrow is pressed while moving
-            if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
+			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 				//increment radius by gravity
 				radius += 3f * Time.deltaTime;
 			}
 		}
 
         //else if user input is the up arrow key
-        else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
+		else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
 			//increment radius by gravity
 			radius += 3f * Time.deltaTime;
         }
@@ -128,9 +124,8 @@ public class playerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Planet")
         {
-            landed = true;
-			needToLand = false;
-			glidingDirection = 0f;
+            nextPlanet = true;
+            glidingDirection = 0f;
             spinWithPlanet = true;
             canMove = false;
             gravity = 0f;
@@ -141,10 +136,10 @@ public class playerController : MonoBehaviour
     {
         if (other.gameObject.tag == "Planet")
         {
+            nextPlanet = true;
             canMove = true;
             gravity = 0.016f;
             spinWithPlanet = false;
-			needToLand = false;
         }
     }
 }

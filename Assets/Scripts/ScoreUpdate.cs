@@ -5,11 +5,10 @@ using UnityEngine.UI;
 
 public class ScoreUpdate : MonoBehaviour {
 	
-	
 	private int Score;
+
 	public Text scoreText;
 	public Text highScoreText;
-	private bool hasExited;
     public GameObject planetRandom;
 	public GameObject player;
 
@@ -26,18 +25,15 @@ public class ScoreUpdate : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D col)//score Update trigger
 	{
-		if (col.gameObject.tag == "scoreOrbit"  && !hasExited && !player.GetComponent<playerController>().needToLand && player.GetComponent<playerController>().landed) {
+		if (col.gameObject.tag == "scoreOrbit" && FindObjectOfType<playerController>().nextPlanet) {
 			Score++;
-			hasExited = true;
             StartCoroutine(switchPlanet());
-            player.GetComponent<playerController>().landed = false;
         }
 	}
 	void OnTriggerEnter2D(Collider2D col)
 	{
-		hasExited = false;
-		player.GetComponent<playerController> ().needToLand = true;
-	}
+        FindObjectOfType<playerController>().nextPlanet = false;
+    }
 
 	void HighScoreUpdate()
 	{
