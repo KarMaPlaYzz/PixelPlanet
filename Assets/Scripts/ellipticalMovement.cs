@@ -11,13 +11,16 @@ public class ellipticalMovement : MonoBehaviour {
 	public float verticalRadius;
 	public float speed;
 
+    public GameObject landerShip;
+    private mainMenu _mainMenu;
+
     private SpriteRenderer satellite;
 
 	void Start()
 	{
         satellite = GetComponent<SpriteRenderer>();
 		centreX = this.transform.parent.transform.position.x;
-		centreY=this.transform.parent.transform.position.y;
+		centreY = this.transform.parent.transform.position.y;
 	}
 	void Update()
 	{

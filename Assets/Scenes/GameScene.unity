@@ -4162,24 +4162,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 1
-  canMove: 1
-  landed: 0
-  spinWithPlanet: 0
   radius: 15
-  myAnim: {fileID: 2016504369}
-  mainCam: {fileID: 996054234}
   current: 0
   currentVelocity: 0
   smoothTime: 1
   maxSpeed: 1
-  decrease: 0.5
-  randomEventManager: {fileID: 0}
-  gravity: 0.016
-  centre: {x: 0, y: 0}
   angle: 0
   glidingDirection: 0
   lastGlidingDirection: 0
-  needToLand: 0
+  gravity: 0.016
+  decrease: 0.5
+  canMove: 1
+  spinWithPlanet: 0
+  nextPlanet: 0
+  myAnim: {fileID: 2016504369}
+  mainCam: {fileID: 996054234}
+  randomEventManager: {fileID: 0}
+  centre: {x: 0, y: 0}
 --- !u!61 &2016504366
 BoxCollider2D:
   m_ObjectHideFlags: 0

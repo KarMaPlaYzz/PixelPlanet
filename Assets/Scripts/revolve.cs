@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class revolve : MonoBehaviour {
 
-	public GameObject planet;
+    public GameObject landerShip;
+    private mainMenu _mainMenu;
+
+    public bool removePlayer = false;
+
+    public GameObject planet;
     public GameObject asteroid;
 	public float rotationSpeedPlanet;
 	public bool clockwise;
@@ -18,6 +23,14 @@ public class revolve : MonoBehaviour {
     }
 	void Update()
 	{
+        if (removePlayer == true)
+        {
+            landerShip.SetActive(false);
+        }
+
+        _mainMenu = FindObjectOfType<mainMenu>();
+        landerShip = GameObject.Find("LanderShip");
+
         if (clockwise) {
 
             asteroid.transform.Rotate(0, 0, randomRotate);
@@ -29,4 +42,13 @@ public class revolve : MonoBehaviour {
         }
 	}
 
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            removePlayer = true;
+            landerShip.SetActive(false);
+            _mainMenu.Died();
+        }
+    }
 }

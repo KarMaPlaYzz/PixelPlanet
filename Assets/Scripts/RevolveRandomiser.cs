@@ -9,11 +9,11 @@ public class RevolveRandomiser : MonoBehaviour {
 		transform.localRotation = new Quaternion (transform.localRotation.x, transform.localRotation.y, Random.value, transform.localRotation.w); ;
 		int directionRandomiser=Random.Range(0,2);
 
-		int speedRandomiser = Random.Range (12, 16); 
+		//int speedRandomiser = Random.Range (12, 16); //
 
 		foreach (Transform asteroid in transform){
 
-		asteroid.GetComponent<revolve> ().rotationSpeedPlanet = speedRandomiser;	
+			asteroid.GetComponent<revolve> ().rotationSpeedPlanet =Random.Range (13, 17);	
 
 		if (directionRandomiser == 0) {
 				asteroid.GetComponent<revolve> ().clockwise = true;
