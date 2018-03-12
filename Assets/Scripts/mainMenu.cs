@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ public class mainMenu : MonoBehaviour {
     }
 
     private void Update()
-    {
+	{Debug.Log (PlayerPrefs.GetInt ("firstTimeCheck"));
         if (countdownStart == true)
 		{
 			mainMenuOverlay.SetActive(false);
@@ -38,9 +39,14 @@ public class mainMenu : MonoBehaviour {
 			countdownTimerDisp = Mathf.Ceil(countdownNumber).ToString();
 
 			//countdownTimer.text = countdownTimerDisp;
-			if (countdownNumber < 5 && countdownNumber >= 3) {
-				countdownTimer.text ="Controls";
-			} else {
+			if (PlayerPrefs.GetInt ("firstTimeCheck") == 0) {
+				if (countdownNumber < 5 && countdownNumber >= 3) {
+					countdownTimer.text = "Controls";
+				} else {
+					countdownTimer.text = countdownTimerDisp;
+				}
+			} 
+			else {
 				countdownTimer.text = countdownTimerDisp;
 			}
             
@@ -48,6 +54,7 @@ public class mainMenu : MonoBehaviour {
             {
                 mainMenuOverlay.SetActive(false);
                 planetRandomizer.SetActive(true);
+				PlayerPrefs.SetInt ("firstTimeCheck", 1);
             }
 
 			if (countdownNumber <0)
@@ -59,6 +66,7 @@ public class mainMenu : MonoBehaviour {
 				timer.SetActive(true);
 				score.SetActive(true);
 				highScore.SetActive(true);
+				PlayerPrefs.SetInt ("firstTimeCheck", 1);
                 //ResetHighScore.SetActive(true);
 			}
 		}
@@ -66,7 +74,26 @@ public class mainMenu : MonoBehaviour {
 
     public void Play()
     {
+		if (PlayerPrefs.GetInt ("firstTimeCheck") == 0) {
+			countdownNumber = 5;
+		} else {
+			countdownNumber = 3;	
+		}
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        string sceneName = currentScene.name;
+
+        if (sceneName == "MenuUI")
+        {
+            SceneManager.LoadSceneAsync("GameScene");
+        }
+
         countdownMenuOverlay.SetActive(true);
+		if (PlayerPrefs.GetInt ("firstTimeCheck") == 0) {
+			countdownMenuOverlay.GetComponent<Transform> ().GetChild (1).gameObject.SetActive (true);
+		} else {
+			countdownMenuOverlay.GetComponent<Transform> ().GetChild (1).gameObject.SetActive (false); 
+		}
         countdownStart = true;
     }
 
@@ -89,6 +116,21 @@ public class mainMenu : MonoBehaviour {
         shipOverlay.SetActive(false);
         planetRandomizer.SetActive(false);
         landerShip.SetActive(false);
+    }
+
+    public void TryAgain()
+    {
+        SceneManager.LoadScene("GameScene");
+    }
+
+    public void GoBackToMenu()
+    {
+        SceneManager.LoadScene("MenuUI");
+    }
+
+    public void Quit()
+    {
+        Application.Quit();
     }
 
     public void Died()

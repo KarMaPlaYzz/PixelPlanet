@@ -45,7 +45,8 @@ public class ScoreUpdate : MonoBehaviour {
 	}
 	public void ResetHighScore()
 	{
-		PlayerPrefs.DeleteAll ();
+		PlayerPrefs.SetInt("HighScore",0);
+		PlayerPrefs.SetInt ("firstTimeCheck", 0);
 		highScoreText.text = "High Score : " + 0;
 	}
 

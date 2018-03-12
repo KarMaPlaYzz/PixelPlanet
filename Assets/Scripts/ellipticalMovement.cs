@@ -24,17 +24,20 @@ public class ellipticalMovement : MonoBehaviour {
 	}
 	void Update()
 	{
-        if (satellite.transform.position.y > 0.3f)
+        if (!pauseMenu.GameIsPaused)
         {
-            satellite.sortingOrder = 1;
-        }
+            if (satellite.transform.position.y > 0.3f)
+            {
+                satellite.sortingOrder = 1;
+            }
 
-        if (satellite.transform.position.y < 0.3f)
-        {
-            satellite.sortingOrder = -1;
-        }
+            if (satellite.transform.position.y < 0.3f)
+            {
+                satellite.sortingOrder = -1;
+            }
 
-        this.transform.position=new Vector2(centreX+(horizontalRadius*Mathf.Cos(alpha*0.005f)),centreY+(verticalRadius*Mathf.Sin(alpha*0.005f)));
-		alpha += speed;
+            this.transform.position = new Vector2(centreX + (horizontalRadius * Mathf.Cos(alpha * 0.005f)), centreY + (verticalRadius * Mathf.Sin(alpha * 0.005f)));
+            alpha += speed;
+        }
 	}
 }

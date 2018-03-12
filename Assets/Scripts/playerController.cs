@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class playerController : MonoBehaviour
 {
+    public GameObject pauseButton;
+
     public float rotateSpeed = 1f;
     public float radius = 9f;
     public float current;
@@ -29,6 +31,7 @@ public class playerController : MonoBehaviour
 
     private void Start()
     {
+        pauseButton.SetActive(true);
         centre = planet;
         myAnim = GetComponent<Animator>();
         randomEventManager = FindObjectOfType<randomEventManager>();
@@ -36,88 +39,97 @@ public class playerController : MonoBehaviour
 
     private void Update()
     {
-        //get user input
 
-        //if user input is the left arrow key
-		if (Input.GetKey (KeyCode.LeftArrow)) {
-			//decrement radius by gravity
-			if (canMove == true)
+        //get user input
+        if (!pauseMenu.GameIsPaused)
+        {
+            //if user input is the left arrow key
+            if (Input.GetKey(KeyCode.LeftArrow))
+            {
+                //decrement radius by gravity
+                if (canMove == true)
+                {
+                    //increment radius by gravity
+                    radius -= gravity;
+
+                    rotateSpeed = 0.7f;
+                    glidingDirection = -2f;
+
+                    //increment the angle by (-rotateSpeed * deltaTime)
+                    angle += -rotateSpeed * Time.deltaTime;
+
+                    lastGlidingDirection = glidingDirection;
+
+                }
+
+                //check if up arrow is pressed while moving
+                if (Input.GetKey(KeyCode.UpArrow) && radius <= 16f)
+                {
+                    //increment radius by gravity
+                    radius += 3f * Time.deltaTime;
+                    rotateSpeed = 0.7f;
+                    glidingDirection = 0f;
+                }
+            }
+
+            //else if user input is the right arrow key
+            else if (Input.GetKey(KeyCode.RightArrow))
+            {
+                //decrement radius by gravity
+                if (canMove == true)
+                {
+                    //increment radius by gravity
+                    radius -= gravity;
+
+                    rotateSpeed = 0.7f;
+                    glidingDirection = 2f;
+
+                    //increment angle by (rotateSpeed * deltaTime)
+                    angle += rotateSpeed * Time.deltaTime;
+
+                    lastGlidingDirection = glidingDirection;
+
+                }
+
+                //check if up arrow is pressed while moving
+                if (Input.GetKey(KeyCode.UpArrow) && radius <= 16f)
+                {
+                    //increment radius by gravity
+                    radius += 3f * Time.deltaTime;
+                }
+            }
+
+            //else if user input is the up arrow key
+            else if (Input.GetKey(KeyCode.UpArrow) && radius <= 16f)
             {
                 //increment radius by gravity
-                radius -= gravity;
-
-                rotateSpeed = 0.7f;
-                glidingDirection = -2f;
-
-                //increment the angle by (-rotateSpeed * deltaTime)
-                angle += -rotateSpeed * Time.deltaTime;
-
-				lastGlidingDirection = glidingDirection;
-                
-			}
-
-			//check if up arrow is pressed while moving
-			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
-				//increment radius by gravity
-				radius += 3f * Time.deltaTime;
-                rotateSpeed = 0.7f;
-                glidingDirection = 0f;
-            }
-        }
-
-        //else if user input is the right arrow key
-        else if (Input.GetKey (KeyCode.RightArrow)) {
-			//decrement radius by gravity
-			if (canMove == true) {
-                //increment radius by gravity
-                radius -= gravity;
-
-                rotateSpeed = 0.7f;
-                glidingDirection = 2f;
-
-                //increment angle by (rotateSpeed * deltaTime)
-                angle += rotateSpeed * Time.deltaTime;
-
-                lastGlidingDirection = glidingDirection;
-
+                radius += 3f * Time.deltaTime;
             }
 
-            //check if up arrow is pressed while moving
-			if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
-				//increment radius by gravity
-				radius += 3f * Time.deltaTime;
-			}
-		}
 
-        //else if user input is the up arrow key
-		else if (Input.GetKey (KeyCode.UpArrow) && radius <= 16f) {
-			//increment radius by gravity
-			radius += 3f * Time.deltaTime;
+            //makes the lander fall
+            radius -= gravity;
+
+            //makes the lander move with the planet
+            if (spinWithPlanet == true)
+            {
+                angle += -randomEventManager.rotationSpeed / 57.51f * Time.deltaTime;
+            }
+
+            //move the lander around the planet
+
+            Vector2 offset = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * radius;
+
+            //set the position transformation equal to center + offset
+            transform.position = centre + offset;
+
+            Vector2 diff = planet - transform.position;
+
+            diff.Normalize();
+
+            //makes the landership look at the planet
+            transform.rotation = Quaternion.Euler(0f, 0f, (Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg) - 270);
         }
-
-
-        //makes the lander fall
-        radius -= gravity;
-
-        //makes the lander move with the planet
-        if (spinWithPlanet == true)
-        {
-            angle += -randomEventManager.rotationSpeed / 57.51f * Time.deltaTime;
-        }
-
-        //move the lander around the planet
-        
-		Vector2 offset = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * radius;
-
-        //set the position transformation equal to center + offset
-        transform.position = centre + offset;
-
-        Vector2 diff = planet - transform.position;
-        
-        diff.Normalize();
-
-        //makes the landership look at the planet
-        transform.rotation = Quaternion.Euler(0f, 0f, (Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg) - 270);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

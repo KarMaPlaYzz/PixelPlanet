@@ -18,19 +18,23 @@ public class timerDisplay : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        timer -= Time.deltaTime;
-        timerText.text = "Time: " + timer.ToString("0");
 
-        if (timer < 0)
+            timer -= Time.deltaTime;
+            timerText.text = "Time: " + timer.ToString("0");
+
+        if (!pauseMenu.GameIsPaused)
         {
-            timerText.text = "YOU LOST!" ;
+            if (timer < 0)
+            {
+                timerText.text = "YOU LOST!";
 
-            timer = 0;
-        }
+                timer = 0;
+            }
 
-        if (playerContr.radius > 12.4f)
-        {
-            timer = 30;
+            if (playerContr.radius > 12.4f)
+            {
+                timer = 30;
+            }
         }
 	}
 }

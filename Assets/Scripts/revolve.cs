@@ -23,22 +23,28 @@ public class revolve : MonoBehaviour {
     }
 	void Update()
 	{
-        if (removePlayer == true)
+        if (!pauseMenu.GameIsPaused)
         {
-            landerShip.SetActive(false);
-        }
+            if (removePlayer == true)
+            {
+                landerShip.SetActive(false);
+            }
 
-        _mainMenu = FindObjectOfType<mainMenu>();
-        landerShip = GameObject.Find("LanderShip");
+            _mainMenu = FindObjectOfType<mainMenu>();
+            landerShip = GameObject.Find("LanderShip");
 
-        if (clockwise) {
+            if (clockwise)
+            {
 
-            asteroid.transform.Rotate(0, 0, randomRotate);
-            transform.RotateAround(planet.transform.position, transform.forward, -rotationSpeedPlanet * Time.deltaTime);
-		} else {
+                asteroid.transform.Rotate(0, 0, randomRotate);
+                transform.RotateAround(planet.transform.position, transform.forward, -rotationSpeedPlanet * Time.deltaTime);
+            }
+            else
+            {
 
-            asteroid.transform.Rotate(0, 0, randomRotate);
-            transform.RotateAround (planet.transform.position, transform.forward, rotationSpeedPlanet * Time.deltaTime);
+                asteroid.transform.Rotate(0, 0, randomRotate);
+                transform.RotateAround(planet.transform.position, transform.forward, rotationSpeedPlanet * Time.deltaTime);
+            }
         }
 	}
 
