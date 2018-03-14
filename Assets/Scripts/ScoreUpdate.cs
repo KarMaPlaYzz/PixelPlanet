@@ -12,8 +12,11 @@ public class ScoreUpdate : MonoBehaviour {
     public GameObject planetRandom;
 	public GameObject player;
 
+    private deathChecker deathChecker;
+
 	void Start()
 	{
+        deathChecker = FindObjectOfType<deathChecker>();
 		Score = 0;
 		highScoreText.text = "High Score : "+PlayerPrefs.GetInt ("HighScore", 0).ToString ();
 	}
@@ -25,9 +28,13 @@ public class ScoreUpdate : MonoBehaviour {
 
     void OnTriggerExit2D(Collider2D col)//score Update trigger
 	{
-		if (col.gameObject.tag == "scoreOrbit" && FindObjectOfType<playerController>().nextPlanet) {
-			Score++;
-            StartCoroutine(switchPlanet());
+        if (!deathChecker.dead)
+        {
+            if (col.gameObject.tag == "scoreOrbit" && FindObjectOfType<playerController>().nextPlanet)
+            {
+                Score++;
+                StartCoroutine(switchPlanet());
+            }
         }
 	}
 	void OnTriggerEnter2D(Collider2D col)

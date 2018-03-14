@@ -18,6 +18,8 @@ public class mainMenu : MonoBehaviour {
 	public GameObject highScore;
 	public GameObject ResetHighScore;
 
+    private deathChecker deathChecker;
+
     public GameObject countdownTimerGb;
     public Text countdownTimer;
     public float countdownNumber = 3;
@@ -28,10 +30,11 @@ public class mainMenu : MonoBehaviour {
     private void Start()
     {
         mainMenuOverlay.SetActive(true);
+        deathChecker = FindObjectOfType<deathChecker>();
     }
 
     private void Update()
-	{Debug.Log (PlayerPrefs.GetInt ("firstTimeCheck"));
+	{
         if (countdownStart == true)
 		{
 			mainMenuOverlay.SetActive(false);
@@ -50,7 +53,7 @@ public class mainMenu : MonoBehaviour {
 				countdownTimer.text = countdownTimerDisp;
 			}
             
-            if (countdownNumber < 0.1f)
+            if (countdownNumber < 2f)
             {
                 mainMenuOverlay.SetActive(false);
                 planetRandomizer.SetActive(true);
@@ -136,5 +139,6 @@ public class mainMenu : MonoBehaviour {
     public void Died()
     {
         deathOverlay.SetActive(true);
+        deathChecker.dead = true;
     }
 }

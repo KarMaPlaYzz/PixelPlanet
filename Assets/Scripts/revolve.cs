@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class revolve : MonoBehaviour {
-
-    public GameObject landerShip;
+    
     private mainMenu _mainMenu;
-
-    public bool removePlayer = false;
 
     public GameObject planet;
     public GameObject asteroid;
@@ -20,19 +17,12 @@ public class revolve : MonoBehaviour {
 	{
         asteroid = gameObject;
         randomRotate = Random.Range(-0.2f, 1f);
+        _mainMenu = FindObjectOfType<mainMenu>();
     }
 	void Update()
 	{
         if (!pauseMenu.GameIsPaused)
         {
-            if (removePlayer == true)
-            {
-                landerShip.SetActive(false);
-            }
-
-            _mainMenu = FindObjectOfType<mainMenu>();
-            landerShip = GameObject.Find("LanderShip");
-
             if (clockwise)
             {
 
@@ -52,8 +42,6 @@ public class revolve : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            removePlayer = true;
-            landerShip.SetActive(false);
             _mainMenu.Died();
         }
     }

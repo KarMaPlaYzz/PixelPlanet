@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class deathScript : MonoBehaviour {
-
-    private GameObject landerShip;
+    
     private mainMenu _mainMenu;
 
     private void Start()
     {
-        landerShip = GameObject.Find("LanderShip");
         _mainMenu = FindObjectOfType<mainMenu>();
     }
 
@@ -17,7 +15,6 @@ public class deathScript : MonoBehaviour {
     {
         if (other.gameObject.tag == "Player")
         {
-            landerShip.SetActive(false);
             _mainMenu.Died();
         }
     }
