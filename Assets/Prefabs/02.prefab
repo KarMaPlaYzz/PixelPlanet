@@ -90,6 +90,7 @@ GameObject:
   - component: {fileID: 212541414623753474}
   - component: {fileID: 50906383973757652}
   - component: {fileID: 114215719395275182}
+  - component: {fileID: 60655260446871690}
   m_Layer: 0
   m_Name: asteroid
   m_TagString: Death
@@ -278,7 +279,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1620330507690612}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.13208759, y: -2.452653, z: 0}
+  m_LocalPosition: {x: -0.004935473, y: -0.0037177394, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4688126135000234}
@@ -718,6 +719,48 @@ PolygonCollider2D:
       - {x: 0.16093987, y: -0.019256867}
       - {x: 0.18725194, y: 0.018895466}
       - {x: 0.20362616, y: 0.069773786}
+--- !u!60 &60655260446871690
+PolygonCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1317426195257562}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.64, y: 0.64}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.04411091, y: 0.20803693}
+      - {x: -0.17787987, y: 0.13930091}
+      - {x: -0.2831563, y: 0.039230257}
+      - {x: -0.2831563, y: 0.011247023}
+      - {x: -0.25329494, y: -0.04911499}
+      - {x: -0.24071592, y: -0.14923023}
+      - {x: -0.16112222, y: -0.19457832}
+      - {x: -0.08339499, y: -0.21899162}
+      - {x: -0.04013389, y: -0.25690877}
+      - {x: 0.017798368, y: -0.2555966}
+      - {x: 0.09426327, y: -0.20040892}
+      - {x: 0.17718977, y: -0.1596235}
+      - {x: 0.22488068, y: -0.10994627}
+      - {x: 0.24899165, y: -0.053394955}
+      - {x: 0.2854831, y: 0.017641012}
+      - {x: 0.28315625, y: 0.033394963}
+      - {x: 0.22284026, y: 0.11448365}
+      - {x: 0.11875293, y: 0.20315625}
 --- !u!60 &60855361949494140
 PolygonCollider2D:
   m_ObjectHideFlags: 1

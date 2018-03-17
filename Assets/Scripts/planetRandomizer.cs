@@ -9,6 +9,6 @@ public class planetRandomizer : MonoBehaviour
     // Use this for initialization
     private void Awake()
     {
-        Instantiate(planets[Random.Range(0, 9)], transform.position, Quaternion.identity);
+        Instantiate(planets[Random.Range(0, 16)], transform.position, Quaternion.identity);
     }
 }

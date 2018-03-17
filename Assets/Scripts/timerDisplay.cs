@@ -7,34 +7,52 @@ public class timerDisplay : MonoBehaviour {
 
     public float timer;
     public Text timerText;
+    
+    private bool disableShip;
 
-    public playerController playerContr;
+    private playerController playerContr;
+    private deathChecker deathChecker;
+    private ScoreUpdate scoreUpdate;
 
 	// Use this for initialization
 	void Start () {
         timer = 30;
         playerContr = FindObjectOfType<playerController>();
+        deathChecker = FindObjectOfType<deathChecker>();
+        scoreUpdate = FindObjectOfType<ScoreUpdate>();
 	}
 	
 	// Update is called once per frame
 	void Update () {
-
-            timer -= Time.deltaTime;
-            timerText.text = "Time: " + timer.ToString("0");
+        timer -= Time.deltaTime;
+        timerText.text = "Time: " + timer.ToString("0");
 
         if (!pauseMenu.GameIsPaused)
         {
             if (timer < 0)
             {
-                timerText.text = "YOU LOST!";
+                StartCoroutine(animationPlayer());
 
                 timer = 0;
             }
 
-            if (playerContr.radius > 12.4f)
+            if (scoreUpdate.timerReset == true)
             {
                 timer = 30;
             }
         }
 	}
+
+    IEnumerator animationPlayer()
+    {
+        timerText.text = "YOU LOST!";
+
+        deathChecker.landerShipAnim.SetBool("Dead", true);
+
+        deathChecker.landersh.enabled = false;
+
+        yield return new WaitForSeconds(0.2f);
+
+        disableShip = true;
+    }
 }

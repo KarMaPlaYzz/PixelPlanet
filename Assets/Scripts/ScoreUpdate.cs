@@ -13,6 +13,9 @@ public class ScoreUpdate : MonoBehaviour {
 	public GameObject player;
 
     private deathChecker deathChecker;
+    private timerDisplay timerDisplay;
+
+    public bool timerReset;
 
 	void Start()
 	{
@@ -34,12 +37,15 @@ public class ScoreUpdate : MonoBehaviour {
             {
                 Score++;
                 StartCoroutine(switchPlanet());
+				planetRandom.SetActive (true);
+                timerReset = true;
             }
         }
 	}
 	void OnTriggerEnter2D(Collider2D col)
 	{
         FindObjectOfType<playerController>().nextPlanet = false;
+        timerReset = false;
     }
 
 	void HighScoreUpdate()
@@ -63,6 +69,10 @@ public class ScoreUpdate : MonoBehaviour {
         yield return new WaitForSeconds(0.5f);
         Destroy(GameObject.FindWithTag("Planet"));
         yield return new WaitForSeconds(0.5f);
-        Instantiate(planetRandom, new Vector3 (0,0), Quaternion.identity);
+		Instantiate(planetRandom, new Vector3 (0,0), Quaternion.identity);
+		//planetRandom.SetActive (true);
+
+
+
     }
 }

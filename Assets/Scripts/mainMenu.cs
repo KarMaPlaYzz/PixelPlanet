@@ -20,6 +20,8 @@ public class mainMenu : MonoBehaviour {
 
     private deathChecker deathChecker;
 
+    public GameObject controlsInstr;
+    
     public GameObject countdownTimerGb;
     public Text countdownTimer;
     public float countdownNumber = 3;
@@ -52,7 +54,7 @@ public class mainMenu : MonoBehaviour {
 			else {
 				countdownTimer.text = countdownTimerDisp;
 			}
-            
+
             if (countdownNumber < 2f)
             {
                 mainMenuOverlay.SetActive(false);
@@ -60,7 +62,24 @@ public class mainMenu : MonoBehaviour {
 				PlayerPrefs.SetInt ("firstTimeCheck", 1);
             }
 
-			if (countdownNumber <0)
+            if (countdownNumber > 2.9f && countdownNumber < 3.1f)
+            {
+                controlsInstr.SetActive(false);
+            }
+
+            if (countdownNumber > 2.0f && countdownNumber <2.1f)
+            {
+                countdownTimerGb.SetActive(false);
+                countdownTimerGb.SetActive(true);
+            }
+
+            if (countdownNumber > 1.0f && countdownNumber < 1.1f)
+            {
+                countdownTimerGb.SetActive(false);
+                countdownTimerGb.SetActive(true);
+            }
+
+            if (countdownNumber <0)
 			{
 				countdownNumber = 0;
 				countdownMenuOverlay.SetActive(false);
@@ -98,6 +117,11 @@ public class mainMenu : MonoBehaviour {
 			countdownMenuOverlay.GetComponent<Transform> ().GetChild (1).gameObject.SetActive (false); 
 		}
         countdownStart = true;
+    }
+
+    IEnumerator animStart()
+    {
+        yield return new WaitForSeconds(1);
     }
 
     public void About()

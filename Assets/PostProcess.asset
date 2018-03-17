@@ -25,20 +25,20 @@ MonoBehaviour:
         motionVectorsResolution: 24
         motionVectorsAmplitude: 64
   fog:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       excludeSkybox: 1
   antialiasing:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       method: 0
       fxaaSettings:
-        preset: 2
+        preset: 3
       taaSettings:
-        jitterSpread: 0.75
-        sharpen: 0.3
-        stationaryBlending: 0.95
-        motionBlending: 0.85
+        jitterSpread: 0.644
+        sharpen: 3
+        stationaryBlending: 0.639
+        motionBlending: 0.655
   ambientOcclusion:
     m_Enabled: 0
     m_Settings:
@@ -71,13 +71,13 @@ MonoBehaviour:
   depthOfField:
     m_Enabled: 0
     m_Settings:
-      focusDistance: 10
+      focusDistance: 5.8
       aperture: 5.6
       focalLength: 50
       useCameraFov: 0
       kernelSize: 1
   motionBlur:
-    m_Enabled: 1
+    m_Enabled: 0
     m_Settings:
       shutterAngle: 255
       sampleCount: 32
@@ -85,25 +85,25 @@ MonoBehaviour:
   eyeAdaptation:
     m_Enabled: 0
     m_Settings:
-      lowPercent: 45
+      lowPercent: 11.027733
       highPercent: 95
-      minLuminance: -5
-      maxLuminance: 1
+      minLuminance: -8.27
+      maxLuminance: -3.7
       keyValue: 0.25
       dynamicKeyValue: 1
       adaptationType: 0
       speedUp: 2
       speedDown: 1
-      logMin: -8
-      logMax: 4
+      logMin: -14
+      logMax: 1
   bloom:
     m_Enabled: 1
     m_Settings:
       bloom:
         intensity: 0.09
-        threshold: 0.14
+        threshold: 0
         softKnee: 0.5
-        radius: 4
+        radius: 7
         antiFlicker: 0
       lensDirt:
         texture: {fileID: 0}
@@ -286,12 +286,12 @@ MonoBehaviour:
       spectralTexture: {fileID: 0}
       intensity: 0.136
   grain:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       colored: 1
-      intensity: 0.5
-      size: 1
-      luminanceContribution: 0.8
+      intensity: 0.199
+      size: 1.79
+      luminanceContribution: 0.755
   vignette:
     m_Enabled: 1
     m_Settings:

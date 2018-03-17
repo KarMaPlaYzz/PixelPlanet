@@ -6,20 +6,19 @@ public class deathChecker : MonoBehaviour {
 
     public GameObject landerShip;
     public bool dead;
+    private bool disableShip;
 
-    public BoxCollider2D landersh;
+    public EdgeCollider2D landersh;
 
     public Animator landerShipAnim;
 
-    private playerController playerContr;
-
-	// Use this for initialization
-	void Start () {
-        playerContr = FindObjectOfType<playerController>();
-	}
-
     // Update is called once per frame
     void Update() {
+        if (disableShip == true)
+        {
+            landerShip.SetActive(false);
+        }
+
         if (dead == true)
         {
             StartCoroutine(animationPlayer());
@@ -32,8 +31,8 @@ public class deathChecker : MonoBehaviour {
 
         landersh.enabled = false;
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.2f);
 
-        landerShip.SetActive(false);
+        disableShip = true;
     }
 }

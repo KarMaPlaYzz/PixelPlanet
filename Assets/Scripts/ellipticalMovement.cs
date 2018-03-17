@@ -18,6 +18,7 @@ public class ellipticalMovement : MonoBehaviour {
 
 	void Start()
 	{
+        _mainMenu = FindObjectOfType<mainMenu>();
         satellite = GetComponent<SpriteRenderer>();
 		centreX = this.transform.parent.transform.position.x;
 		centreY = this.transform.parent.transform.position.y;
@@ -40,4 +41,12 @@ public class ellipticalMovement : MonoBehaviour {
             alpha += speed;
         }
 	}
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            _mainMenu.Died();
+        }
+    }
 }

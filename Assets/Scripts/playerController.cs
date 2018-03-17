@@ -71,7 +71,7 @@ public class playerController : MonoBehaviour
                     {
                         rightThruster.SetActive(true);
 
-                        rotateSpeed = 0.7f;
+                        rotateSpeed = 0.5f;
                         glidingDirection = -2f;
 
                         //increment the angle by (-rotateSpeed * deltaTime)
@@ -83,17 +83,6 @@ public class playerController : MonoBehaviour
                         {
                             mainThruster.SetActive(false);
                         }
-                    }
-
-                    //check if up arrow is pressed while moving
-                    if (Input.GetKey(KeyCode.UpArrow) && radius <= 16f)
-                    {
-                        //increment radius by gravity
-                        radius += 3f * Time.deltaTime;
-                        rotateSpeed = 0.7f;
-                        glidingDirection = 0f;
-
-                        mainThruster.SetActive(true);
                     }
                 }
 
@@ -110,7 +99,7 @@ public class playerController : MonoBehaviour
                     {
                         leftThruster.SetActive(true);
 
-                        rotateSpeed = 0.7f;
+                        rotateSpeed = 0.5f;
                         glidingDirection = 2f;
 
                         //increment angle by (rotateSpeed * deltaTime)
@@ -122,15 +111,6 @@ public class playerController : MonoBehaviour
                         {
                             mainThruster.SetActive(false);
                         }
-                    }
-
-                    //check if up arrow is pressed while moving
-                    if (Input.GetKey(KeyCode.UpArrow) && radius <= 16f)
-                    {
-                        //increment radius by gravity
-                        radius += 3f * Time.deltaTime;
-
-                        mainThruster.SetActive(true);
                     }
                 }
 
@@ -145,7 +125,7 @@ public class playerController : MonoBehaviour
                 }
 
                 //else if user input is the up arrow key
-                else if (Input.GetKey(KeyCode.UpArrow) && radius <= 16f)
+                else if (Input.GetKey(KeyCode.UpArrow) && radius <= 17f)
                 {
                     //increment radius by gravity
                     radius += 3f * Time.deltaTime;
@@ -159,14 +139,14 @@ public class playerController : MonoBehaviour
                 //makes the lander move with the planet
                 if (spinWithPlanet == true)
                 {
+                    leftThruster.SetActive(false);
+                    rightThruster.SetActive(false);
+                    mainThruster.SetActive(false);
                     angle += -randomEventManager.rotationSpeed / 57.51f * Time.deltaTime;
                 }
 
-                //move the lander around the planet
-
                 Vector2 offset = new Vector2(Mathf.Sin(angle), Mathf.Cos(angle)) * radius;
 
-                //set the position transformation equal to center + offset
                 transform.position = centre + offset;
 
                 Vector2 diff = planet - transform.position;
