@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ScoreUpdate : MonoBehaviour {
 	
@@ -21,7 +22,11 @@ public class ScoreUpdate : MonoBehaviour {
 	{
         deathChecker = FindObjectOfType<deathChecker>();
 		Score = 0;
-		highScoreText.text = "High Score : "+PlayerPrefs.GetInt ("HighScore", 0).ToString ();
+		if (SceneManager.GetActiveScene ().buildIndex == 1) {
+			highScoreText.text = "High Score : " + PlayerPrefs.GetInt ("HighScoreModeL_A_L", 0).ToString ();
+		} else if (SceneManager.GetActiveScene ().buildIndex == 2) {
+			highScoreText.text = "High Score : " + PlayerPrefs.GetInt ("HighScoreModeC_C", 0).ToString ();
+		}
 	}
 	void Update()
 	{
@@ -49,11 +54,19 @@ public class ScoreUpdate : MonoBehaviour {
     }
 
 	void HighScoreUpdate()
-	{
-		if (Score > PlayerPrefs.GetInt ("HighScore", 0)) {
-			PlayerPrefs.SetInt ("HighScore", Score);
-			highScoreText.text = "High Score : "+Score.ToString ();
+	{if (SceneManager.GetActiveScene ().buildIndex == 1) {
+			if (Score > PlayerPrefs.GetInt ("HighScoreModeL_A_L", 0)) {
+				PlayerPrefs.SetInt ("HighScoreModeL_A_L", Score);
+				highScoreText.text = "High Score : " + Score.ToString ();
 
+			}
+		}
+		else if (SceneManager.GetActiveScene ().buildIndex == 2) {
+			if (Score > PlayerPrefs.GetInt ("HighScoreModeC_C", 0)) {
+				PlayerPrefs.SetInt ("HighScoreModeC_C", Score);
+				highScoreText.text = "High Score : " + Score.ToString ();
+
+			}
 		}
 	}
 	public void ResetHighScore()

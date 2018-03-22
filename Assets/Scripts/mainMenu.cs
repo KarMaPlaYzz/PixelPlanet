@@ -107,7 +107,7 @@ public class mainMenu : MonoBehaviour {
 
         if (sceneName == "MenuUI")
         {
-            SceneManager.LoadSceneAsync("GameScene");
+            SceneManager.LoadSceneAsync("LandAndLeave");
         }
 
         countdownMenuOverlay.SetActive(true);
@@ -147,7 +147,7 @@ public class mainMenu : MonoBehaviour {
 
     public void TryAgain()
     {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene("LandAndLeave");
     }
 
     public void GoBackToMenu()

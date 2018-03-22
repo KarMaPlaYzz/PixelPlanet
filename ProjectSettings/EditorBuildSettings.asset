@@ -9,5 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/MenuUI.unity
     guid: 9f310e8569f23ac44b991e9d7a918566
   - enabled: 1
-    path: Assets/Scenes/GameScene.unity
+    path: Assets/Scenes/LandAndLeave.unity
     guid: a5a16297eb6107b449d1d4dc48145b43
+  - enabled: 1
+    path: Assets/Scenes/CollectCoins.unity
+    guid: 050e995de98cd2a429d2b6c43b92ca21

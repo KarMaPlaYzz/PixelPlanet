@@ -4110,7 +4110,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 1
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 0
 --- !u!212 &2016504363
 SpriteRenderer:
@@ -4204,6 +4204,7 @@ MonoBehaviour:
   rightThruster: {fileID: 2127741888}
   mainThruster: {fileID: 772300883}
   planetDistance: {fileID: 1231923040}
+  CoinManager: {fileID: 0}
 --- !u!68 &2016504366
 EdgeCollider2D:
   m_ObjectHideFlags: 0

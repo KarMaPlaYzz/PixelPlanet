@@ -16,7 +16,7 @@ public class timerDisplay : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        timer = 30;
+        timer = 50;
         playerContr = FindObjectOfType<playerController>();
         deathChecker = FindObjectOfType<deathChecker>();
         scoreUpdate = FindObjectOfType<ScoreUpdate>();
@@ -38,7 +38,7 @@ public class timerDisplay : MonoBehaviour {
 
             if (scoreUpdate.timerReset == true)
             {
-                timer = 30;
+                timer = 50;
             }
         }
 	}

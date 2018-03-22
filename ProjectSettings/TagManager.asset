@@ -8,6 +8,7 @@ TagManager:
   - Planet
   - scoreOrbit
   - PlanetRandomizer
+  - Coin
   layers:
   - Default
   - TransparentFX

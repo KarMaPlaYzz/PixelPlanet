@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerController : MonoBehaviour
 {
@@ -38,9 +39,10 @@ public class playerController : MonoBehaviour
     private deathChecker deathChecker;
 
     public Transform planetDistance;
+	public GameObject CoinManager;
 
     private void Start()
-    {
+	{CoinManager = GameObject.FindGameObjectWithTag ("Coin");
         leftThruster.SetActive(false);
         rightThruster.SetActive(false);
         mainThruster.SetActive(false);
@@ -57,7 +59,7 @@ public class playerController : MonoBehaviour
     }
 
     private void Update()
-    {
+	{CoinManager = GameObject.FindGameObjectWithTag ("Coin");
         if (!deathChecker.dead)
         {
             //get user input
@@ -160,25 +162,57 @@ public class playerController : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Planet")
-        {
-            nextPlanet = true;
-            glidingDirection = 0f;
-            spinWithPlanet = true;
-            canMove = false;
-            gravity = 0f;
-        }
+	{
+		if (SceneManager.GetActiveScene ().buildIndex == 1) {
+			if (other.gameObject.tag == "Planet") {
+				nextPlanet = true;
+				glidingDirection = 0f;
+				spinWithPlanet = true;
+				canMove = false;
+				gravity = 0f;
+			}
+		} 
+	else if (SceneManager.GetActiveScene ().buildIndex == 2)
+		{
+
+			if (other.gameObject.tag == "Planet" && CoinManager.GetComponent<Coin>().coinsStillLeft == false) {
+				nextPlanet = true;
+				glidingDirection = 0f;
+				spinWithPlanet = true;
+				canMove = false;
+				gravity = 0f;
+			} else if (other.gameObject.tag == "Planet" && CoinManager.GetComponent<Coin>().coinsStillLeft == true) {
+				nextPlanet = false;
+				glidingDirection = 0f;
+				spinWithPlanet = true;
+				canMove = false;
+				gravity = 0f;
+			}
+		}
+
     }
 
     private void OnCollisionExit2D(Collision2D other)
-    {
-        if (other.gameObject.tag == "Planet")
-        {
-            nextPlanet = true;
-            canMove = true;
-            gravity = 0.016f;
-            spinWithPlanet = false;
-        }
-    }
+	{
+		if (SceneManager.GetActiveScene ().buildIndex == 1) {
+			if (other.gameObject.tag == "Planet") {
+				nextPlanet = true;
+				canMove = true;
+				gravity = 0.016f;
+				spinWithPlanet = false;
+			}
+		} else if (SceneManager.GetActiveScene ().buildIndex == 2) {
+			if (other.gameObject.tag == "Planet" && CoinManager.GetComponent<Coin>().coinsStillLeft == false) {
+				nextPlanet = true;
+				canMove = true;
+				gravity = 0.016f;
+				spinWithPlanet = false;	
+			} else if (other.gameObject.tag == "Planet" && CoinManager.GetComponent<Coin>().coinsStillLeft == true) {
+				nextPlanet = false;
+				canMove = true;
+				gravity = 0.016f;
+				spinWithPlanet = false;	
+			}
+		}
+	}
 }
