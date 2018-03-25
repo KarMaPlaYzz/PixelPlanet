@@ -7,17 +7,12 @@ public class timerDisplay : MonoBehaviour {
 
     public float timer;
     public Text timerText;
-    
-    private bool disableShip;
-
-    private playerController playerContr;
     private deathChecker deathChecker;
     private ScoreUpdate scoreUpdate;
 
 	// Use this for initialization
 	void Start () {
         timer = 50;
-        playerContr = FindObjectOfType<playerController>();
         deathChecker = FindObjectOfType<deathChecker>();
         scoreUpdate = FindObjectOfType<ScoreUpdate>();
 	}
@@ -52,7 +47,5 @@ public class timerDisplay : MonoBehaviour {
         deathChecker.landersh.enabled = false;
 
         yield return new WaitForSeconds(0.2f);
-
-        disableShip = true;
     }
 }

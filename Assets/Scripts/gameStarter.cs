@@ -8,11 +8,16 @@ public class gameStarter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        mainMenuUI.Play();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+        if (mainMenuUI.landAndLeave == true)
+        {
+            mainMenuUI.LandAndLeave();
+            mainMenuUI.countdownStart = true;
+        }
+
+        if (mainMenuUI.collectCoinLevel == true)
+        {
+            mainMenuUI.CollectCoin();
+            mainMenuUI.countdownStart = true;
+        }
 	}
 }
