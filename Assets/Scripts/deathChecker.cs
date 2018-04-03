@@ -8,9 +8,16 @@ public class deathChecker : MonoBehaviour {
     public bool dead;
     private bool disableShip;
 
+    public GameObject deathOverlay;
+
     public EdgeCollider2D landersh;
 
     public Animator landerShipAnim;
+
+    private void Start()
+    {
+        deathOverlay = GameObject.Find("deathChecker");
+    }
 
     // Update is called once per frame
     void Update() {
@@ -27,6 +34,7 @@ public class deathChecker : MonoBehaviour {
 
     IEnumerator animationPlayer()
     {
+
         landerShipAnim.SetBool("Dead", true);
 
         landersh.enabled = false;

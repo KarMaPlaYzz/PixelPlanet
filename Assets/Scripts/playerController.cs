@@ -19,6 +19,7 @@ public class playerController : MonoBehaviour
     public float gravity = .016f;
     public float decrease = 1f;
 
+	public bool rapidDownMovement;
     public bool canMove = true;
     public bool spinWithPlanet = false;
     public bool nextPlanet = false;
@@ -42,7 +43,10 @@ public class playerController : MonoBehaviour
 	public GameObject CoinManager;
 
     private void Start()
-	{CoinManager = GameObject.FindGameObjectWithTag ("Coin");
+
+	{
+        rapidDownMovement = true;
+		CoinManager = GameObject.FindGameObjectWithTag ("Coin");
         leftThruster.SetActive(false);
         rightThruster.SetActive(false);
         mainThruster.SetActive(false);
@@ -59,7 +63,12 @@ public class playerController : MonoBehaviour
     }
 
     private void Update()
-	{CoinManager = GameObject.FindGameObjectWithTag ("Coin");
+	{if (SceneManager.GetActiveScene ().buildIndex == 2) {
+			if (CoinManager == null) {
+				CoinManager = GameObject.FindGameObjectWithTag ("Coin");
+			}
+			CollectCoinLevel ();
+		}
         if (!deathChecker.dead)
         {
             //get user input
@@ -84,6 +93,7 @@ public class playerController : MonoBehaviour
                         if (Input.GetKeyUp(KeyCode.UpArrow))
                         {
                             mainThruster.SetActive(false);
+
                         }
                     }
                 }
@@ -121,19 +131,22 @@ public class playerController : MonoBehaviour
                     mainThruster.SetActive(false);
                 }
 
-                if (Input.GetKeyUp(KeyCode.RightArrow))
-                {
-                    leftThruster.SetActive(false);
-                }
+				if (Input.GetKeyUp (KeyCode.RightArrow)) {
+					leftThruster.SetActive (false);
+				}
 
                 //else if user input is the up arrow key
-                else if (Input.GetKey(KeyCode.UpArrow) && radius <= 17f)
-                {
-                    //increment radius by gravity
-                    radius += 3f * Time.deltaTime;
+                else if (Input.GetKey (KeyCode.UpArrow) && radius <= 17f) {
+					//increment radius by gravity
+					radius += 3f * Time.deltaTime;
 
-                    mainThruster.SetActive(true);
-                }
+					mainThruster.SetActive (true);
+				}
+                else if (Input.GetKey (KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow) && radius <= 17f && rapidDownMovement)
+                {
+					mainThruster.SetActive (false);
+					radius -= 4f * Time.deltaTime;
+				}
 
                 //makes the lander fall
                 radius -= gravity;
@@ -160,9 +173,19 @@ public class playerController : MonoBehaviour
             }
         }
     }
+	private void CollectCoinLevel()
+	{
+		if (CoinManager.GetComponent<Coin> ().coinsStillLeft == false) {
+			nextPlanet = true;
+		} else {
+			nextPlanet = false;
+		}
+	}
 
     private void OnCollisionEnter2D(Collision2D other)
 	{
+        rapidDownMovement = false;
+
 		if (SceneManager.GetActiveScene ().buildIndex == 1) {
 			if (other.gameObject.tag == "Planet") {
 				nextPlanet = true;
@@ -171,29 +194,23 @@ public class playerController : MonoBehaviour
 				canMove = false;
 				gravity = 0f;
 			}
-		} 
-	else if (SceneManager.GetActiveScene ().buildIndex == 2)
-		{
-
-			if (other.gameObject.tag == "Planet" && CoinManager.GetComponent<Coin>().coinsStillLeft == false) {
-				nextPlanet = true;
-				glidingDirection = 0f;
-				spinWithPlanet = true;
-				canMove = false;
-				gravity = 0f;
-			} else if (other.gameObject.tag == "Planet" && CoinManager.GetComponent<Coin>().coinsStillLeft == true) {
-				nextPlanet = false;
+		} else { 
+			if (other.gameObject.tag == "Planet") {
+				 
 				glidingDirection = 0f;
 				spinWithPlanet = true;
 				canMove = false;
 				gravity = 0f;
 			}
 		}
+	 
 
     }
 
     private void OnCollisionExit2D(Collision2D other)
 	{
+        rapidDownMovement = true;
+
 		if (SceneManager.GetActiveScene ().buildIndex == 1) {
 			if (other.gameObject.tag == "Planet") {
 				nextPlanet = true;
@@ -201,18 +218,14 @@ public class playerController : MonoBehaviour
 				gravity = 0.016f;
 				spinWithPlanet = false;
 			}
-		} else if (SceneManager.GetActiveScene ().buildIndex == 2) {
-			if (other.gameObject.tag == "Planet" && CoinManager.GetComponent<Coin>().coinsStillLeft == false) {
-				nextPlanet = true;
+		} else {
+			if (other.gameObject.tag == "Planet") {
+				
 				canMove = true;
 				gravity = 0.016f;
-				spinWithPlanet = false;	
-			} else if (other.gameObject.tag == "Planet" && CoinManager.GetComponent<Coin>().coinsStillLeft == true) {
-				nextPlanet = false;
-				canMove = true;
-				gravity = 0.016f;
-				spinWithPlanet = false;	
+				spinWithPlanet = false;
 			}
 		}
+			
 	}
 }

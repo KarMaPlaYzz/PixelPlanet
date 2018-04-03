@@ -25,17 +25,35 @@ public class revolve : MonoBehaviour {
 	{
         if (!pauseMenu.GameIsPaused)
         {
-            if (clockwise)
+            if (!pauseMenu.GameIsPaused)
             {
+                if (clockwise)
+                {
 
-                asteroid.transform.Rotate(0, 0, randomRotate);
-				transform.RotateAround(planet.transform.position+new Vector3(Random.Range(-1,1f),Random.Range(-1f,.1f),0), transform.forward, -rotationSpeedPlanet * Time.deltaTime);
+                    asteroid.transform.Rotate(0, 0, randomRotate);
+                    transform.RotateAround(planet.transform.position + new Vector3(Random.Range(-1, 1f), Random.Range(-1f, .1f), 0), transform.forward, -rotationSpeedPlanet * Time.deltaTime);
+                }
+                else
+                {
+
+                    asteroid.transform.Rotate(0, 0, randomRotate);
+                    transform.RotateAround(planet.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), transform.forward, rotationSpeedPlanet * Time.deltaTime);
+                }
             }
             else
             {
+                if (clockwise)
+                {
 
-                asteroid.transform.Rotate(0, 0, randomRotate);
-				transform.RotateAround(planet.transform.position+new Vector3(Random.Range(-1f,1f),Random.Range(-1f,1f),0), transform.forward, rotationSpeedPlanet * Time.deltaTime);
+                    asteroid.transform.Rotate(0, 0, randomRotate);
+                    transform.RotateAround(planet.transform.position + new Vector3(Random.Range(-1, 1f), Random.Range(-1f, .1f), 0), transform.forward, 0);
+                }
+                else
+                {
+
+                    asteroid.transform.Rotate(0, 0, randomRotate);
+                    transform.RotateAround(planet.transform.position + new Vector3(Random.Range(-1f, 1f), Random.Range(-1f, 1f), 0), transform.forward, 0);
+                }
             }
         }
 	}

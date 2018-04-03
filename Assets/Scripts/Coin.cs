@@ -32,10 +32,5 @@ public class Coin : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		CoinCheck ();
-		Debug.Log (coinsStillLeft);
-		if (this.GetComponentInChildren<CollectCoin> ().isCollected) {
-			coinsCollected++;
-		}
-
 	}
 }

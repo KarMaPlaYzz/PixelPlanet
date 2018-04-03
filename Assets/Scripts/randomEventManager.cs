@@ -25,8 +25,10 @@ public class randomEventManager : MonoBehaviour {
     /////////////////////////////////////////////////////////////////////////////////////////////
     //Method called every frame while the object is active
     private void Update()
-    {
-        planetObject.transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
+	{if (!pauseMenu.GameIsPaused) {
+			planetObject.transform.Rotate (0, 0, rotationSpeed * Time.deltaTime);
+		} 
+	
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////

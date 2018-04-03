@@ -560,7 +560,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 1000
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -1310,6 +1310,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ff671042dc1bb43aca48ea43cf6815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystem: {fileID: 0}
+  pSystem: {fileID: 0}
+  isCollected: 0
 --- !u!114 &114601930097200850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1343,6 +1346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 873b281af46792c40a03776bf32c1a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coinsCollected: 0
+  coinsStillLeft: 0
 --- !u!114 &114664328248648890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1354,6 +1359,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ff671042dc1bb43aca48ea43cf6815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystem: {fileID: 0}
+  pSystem: {fileID: 0}
+  isCollected: 0
 --- !u!114 &114943982152126862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1365,6 +1373,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64ff671042dc1bb43aca48ea43cf6815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleSystem: {fileID: 0}
+  pSystem: {fileID: 0}
+  isCollected: 0
 --- !u!114 &114945630751874410
 MonoBehaviour:
   m_ObjectHideFlags: 1

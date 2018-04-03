@@ -19,6 +19,8 @@ public class mainMenu : MonoBehaviour {
     public GameObject ResetHighScore;
     public GameObject landAndLeave;
     public GameObject collectCoin;
+	public Text highScoreLandNLeave;
+	public Text highScoreCollectCoins;
 
     private deathChecker deathChecker;
 
@@ -43,7 +45,11 @@ public class mainMenu : MonoBehaviour {
 	}*/
 
     private void Start()
+
 	{
+		if (SceneManager.GetActiveScene ().buildIndex == 0) {
+			DisplayHighScore ();
+		}
 		if (PlayerPrefs.GetInt("firstTimeCheck") == 0)
 		{
 			countdownNumber = 5;
@@ -60,7 +66,7 @@ public class mainMenu : MonoBehaviour {
 	}
 
     private void Update()
-	{Debug.Log (PlayerPrefs.GetInt ("firstTimeCheck"));
+    {
         if (countdownStart == true)
         {
 			
@@ -178,6 +184,11 @@ public class mainMenu : MonoBehaviour {
         mainMenuOverlay.SetActive(false);
     }
 
+    public void Menu()
+    {
+        SceneManager.LoadScene("MenuUI");
+    }
+
     public void Ship()
     {
         shipOverlay.SetActive(true);
@@ -195,7 +206,7 @@ public class mainMenu : MonoBehaviour {
 
     public void TryAgain()
     {
-        SceneManager.LoadScene("LandAndLeave");
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GoBackToMenu()
@@ -278,4 +289,10 @@ public class mainMenu : MonoBehaviour {
             countdownStart = true;
         }
     }
+
+	void DisplayHighScore()
+	{
+		highScoreLandNLeave.text = highScoreLandNLeave.text+" "+PlayerPrefs.GetInt ("HighScoreModeL_A_L").ToString();
+		highScoreCollectCoins.text=highScoreCollectCoins.text+" "+PlayerPrefs.GetInt ("HighScoreModeC_C").ToString();
+	}
 }

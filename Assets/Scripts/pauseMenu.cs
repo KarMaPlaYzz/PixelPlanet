@@ -7,6 +7,9 @@ public class pauseMenu : MonoBehaviour {
     public static bool GameIsPaused = false;
 
     public GameObject pauseMenuUI;
+	public GameObject landerShip;
+	 
+    public AudioSource audioSource;
 
 	// Update is called once per frame
 	void Update () {
@@ -26,14 +29,21 @@ public class pauseMenu : MonoBehaviour {
     public void Resume()
     {
         pauseMenuUI.SetActive(false);
-        Time.timeScale = 1f;
+		Time.timeScale = 1f;
         GameIsPaused = false;
+        audioSource.volume += 1f;
     }
 
     public void Pause()
-    {
-        pauseMenuUI.SetActive(true);
-        Time.timeScale = 0f;
-        GameIsPaused = true;
+
+	{
+        landerShip = GameObject.Find ("LanderShip");
+
+		if (landerShip.activeSelf) {
+			pauseMenuUI.SetActive (true);
+			Time.timeScale = 0.01f;
+			GameIsPaused = true;
+            audioSource.volume = 0.25f;
+        }
     }
 }
