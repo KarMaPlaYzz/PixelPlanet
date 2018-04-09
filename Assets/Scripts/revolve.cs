@@ -22,7 +22,8 @@ public class revolve : MonoBehaviour {
 		//Vector3 randomHeight = new Vector3 (planet.transform.position.x + Random.Range (-.1f, .1f), planet.transform.position.y + Random.Range (-.1f, .1f), planet.transform.position.z);
     }
 	void Update()
-	{
+	{	
+		
         if (!pauseMenu.GameIsPaused)
         {
             if (!pauseMenu.GameIsPaused)

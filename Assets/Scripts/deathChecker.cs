@@ -6,13 +6,14 @@ public class deathChecker : MonoBehaviour {
 
     public GameObject landerShip;
     public bool dead;
-    private bool disableShip;
+    public bool disableShip;
 
     public GameObject deathOverlay;
 
     public EdgeCollider2D landersh;
 
     public Animator landerShipAnim;
+	private timerDisplay time;
 
     private void Start()
     {
@@ -24,7 +25,11 @@ public class deathChecker : MonoBehaviour {
         if (disableShip == true)
         {
             landerShip.SetActive(false);
+			 
         }
+		if (time.timer <= 0) {
+			dead = true;
+		}
 
         if (dead == true)
         {

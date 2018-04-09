@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+
 public class Coin : MonoBehaviour {
+
 	public int coinsCollected;
 	public bool coinsStillLeft;
+
 	// Use this for initialization
 	void Start () {
 		coinsStillLeft = true;

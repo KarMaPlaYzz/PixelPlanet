@@ -28,16 +28,18 @@ public class timerDisplay : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (!pauseMenu.GameIsPaused) {
+		if (!pauseMenu.GameIsPaused && deathChecker.dead==false) {
 			timer -= Time.deltaTime;
 		}
         timerText.text = "Time: " + timer.ToString("0");
 		AddTime ();
 		if (!pauseMenu.GameIsPaused) {
-			if (timer < 0) {
+			if (timer < 0 || deathChecker.dead==true) {
 				StartCoroutine (animationPlayer ());
 
 				timer = 0;
+				deathChecker.dead = true;
+                
 			}
 
 			if (scoreUpdate.timerReset == true) {
@@ -62,6 +64,12 @@ public class timerDisplay : MonoBehaviour {
 
         deathChecker.landersh.enabled = false;
 
+        FindObjectOfType<playerController>().leftThruster.SetActive(false);
+        FindObjectOfType<playerController>().rightThruster.SetActive(false);
+        FindObjectOfType<playerController>().mainThruster.SetActive(false);
+
         yield return new WaitForSeconds(0.2f);
+
+        FindObjectOfType<mainMenu>().deathOverlay.SetActive(true);
     }
 }

@@ -16,7 +16,7 @@ public class cameraMovement : MonoBehaviour {
 				Camera.main.orthographicSize += landership.GetComponent<playerController> ().radius * Time.deltaTime * 0.05f;
 			}
 		} else if(landership.activeSelf && !landership.GetComponent<playerController> ().mainThruster.activeSelf)  {
-			if (Camera.main.orthographicSize >= 16f) {
+			if (Camera.main.orthographicSize >= 15f) {
 				Camera.main.orthographicSize -= landership.GetComponent<playerController> ().radius * Time.deltaTime * 0.05f;
 			}
 		}

@@ -142,7 +142,7 @@ public class playerController : MonoBehaviour
 
 					mainThruster.SetActive (true);
 				}
-                else if (Input.GetKey (KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow) && radius <= 17f && rapidDownMovement)
+                else if (Input.GetKey (KeyCode.LeftArrow) && Input.GetKey(KeyCode.RightArrow) && rapidDownMovement)
                 {
 					mainThruster.SetActive (false);
 					radius -= 4f * Time.deltaTime;
@@ -175,7 +175,7 @@ public class playerController : MonoBehaviour
     }
 	private void CollectCoinLevel()
 	{
-		if (CoinManager.GetComponent<Coin> ().coinsStillLeft == false) {
+		if (CoinManager.GetComponent<Coin> ().coinsStillLeft == false && deathChecker.dead==false) {
 			nextPlanet = true;
 		} else {
 			nextPlanet = false;

@@ -19,6 +19,8 @@ public class mainMenu : MonoBehaviour {
     public GameObject ResetHighScore;
     public GameObject landAndLeave;
     public GameObject collectCoin;
+    public GameObject backButton;
+
 	public Text highScoreLandNLeave;
 	public Text highScoreCollectCoins;
 
@@ -134,7 +136,8 @@ public class mainMenu : MonoBehaviour {
     {
         landAndLeave.SetActive(true);
         collectCoin.SetActive(true);
-        
+        backButton.SetActive(true);
+
         if (landAndLeaveLevel == true || collectCoinLevel == true)
         {
             
@@ -200,8 +203,9 @@ public class mainMenu : MonoBehaviour {
         mainMenuOverlay.SetActive(true);
         aboutOverlay.SetActive(false);
         shipOverlay.SetActive(false);
-        planetRandomizer.SetActive(false);
-        landerShip.SetActive(false);
+        landAndLeave.SetActive(false);
+        collectCoin.SetActive(false);
+        backButton.SetActive(false);
     }
 
     public void TryAgain()
