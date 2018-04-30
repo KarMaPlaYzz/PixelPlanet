@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class deathChecker : MonoBehaviour {
 
+    public AudioSource deathSound;
+
     public GameObject landerShip;
     public bool dead;
     public bool disableShip;
@@ -39,6 +41,7 @@ public class deathChecker : MonoBehaviour {
 
     IEnumerator animationPlayer()
     {
+        deathSound.Play();
 
         landerShipAnim.SetBool("Dead", true);
 
@@ -47,5 +50,7 @@ public class deathChecker : MonoBehaviour {
         yield return new WaitForSeconds(0.2f);
 
         disableShip = true;
+
+        deathSound.Stop();
     }
 }

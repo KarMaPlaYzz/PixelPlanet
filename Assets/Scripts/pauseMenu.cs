@@ -10,7 +10,13 @@ public class pauseMenu : MonoBehaviour {
 	public GameObject landerShip;
 	 
     public AudioSource audioSource;
+	private deathChecker death;
+ 
 
+	void Start()
+	{
+		death = FindObjectOfType<deathChecker> ();
+	}
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -37,13 +43,13 @@ public class pauseMenu : MonoBehaviour {
     public void Pause()
 
 	{
-        landerShip = GameObject.Find ("LanderShip");
+       // landerShip = GameObject.Find ("LanderShip");
 
-		if (landerShip.activeSelf) {
+		if (GameObject.Find ("LanderShip").activeSelf && death.dead == false) {
 			pauseMenuUI.SetActive (true);
 			Time.timeScale = 0.01f;
 			GameIsPaused = true;
-            audioSource.volume = 0.25f;
-        }
+			audioSource.volume = 0.25f;
+		} 
     }
 }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 
 public class mainMenu : MonoBehaviour {
 
+    public GameObject pixelPlanetLogo;
     public GameObject mainMenuOverlay;
     public GameObject deathOverlay;
     public GameObject aboutOverlay;
@@ -29,6 +30,7 @@ public class mainMenu : MonoBehaviour {
     public GameObject controlsInstr;
 
     public GameObject countdownTimerGb;
+	public bool initialTime;
     public Text countdownTimer;
     private float countdownNumber;
     public float countDownSpeed = 1.5f;
@@ -37,18 +39,13 @@ public class mainMenu : MonoBehaviour {
 
     public bool landAndLeaveLevel;
     public bool collectCoinLevel;
-
-	/*void Awake()
-	{
-		if (SceneManager.GetActiveScene ().buildIndex == 1 || SceneManager.GetActiveScene ().buildIndex == 2) 
-		{
-			countdownStart = true;
-		}
-	}*/
-
+	public GameObject pauseButton;
+	public GameObject firstMusic;
+	 
     private void Start()
 
 	{
+		
 		if (SceneManager.GetActiveScene ().buildIndex == 0) {
 			DisplayHighScore ();
 		}
@@ -65,6 +62,7 @@ public class mainMenu : MonoBehaviour {
 		}
 	
         deathChecker = FindObjectOfType<deathChecker>();
+
 	}
 
     private void Update()
@@ -130,10 +128,15 @@ public class mainMenu : MonoBehaviour {
                 //ResetHighScore.SetActive(true);
             }
         }
+		if (deathChecker.dead == true) {
+		
+			pauseButton.SetActive (false);
+		}
     }
 
     public void Play()
     {
+        pixelPlanetLogo.SetActive(false);
         landAndLeave.SetActive(true);
         collectCoin.SetActive(true);
         backButton.SetActive(true);
@@ -200,6 +203,7 @@ public class mainMenu : MonoBehaviour {
 
     public void Back()
     {
+        pixelPlanetLogo.SetActive(true);
         mainMenuOverlay.SetActive(true);
         aboutOverlay.SetActive(false);
         shipOverlay.SetActive(false);
@@ -209,8 +213,11 @@ public class mainMenu : MonoBehaviour {
     }
 
     public void TryAgain()
-    {
+	{ 
 		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
+
+
     }
 
     public void GoBackToMenu()
